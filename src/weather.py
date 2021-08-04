@@ -34,12 +34,20 @@ if res.status_code != 200:
 
 temp = round((res.json()['main']['temp']-273.15) * (9/5) +32)
 
-message = client.messages \
-        .create(
-                body=f"The tempearture at {args.zip} is {temp}",
-                from_='+13236724859',
-                to='+14805186235'
-        )
+if temp <= 68:
+    message = client.messages \
+            .create(
+                    body=f"The tempearture at {args.zip} is {temp}. Also Hachi safe",
+                    from_='+13236724859',
+                    to='+14805186235'
+            )
+else:
+    message = client.messages \
+           .create(
+                   body=f"The tempearture at {args.zip} is {temp}",
+                   from_='+13236724859',
+                   to='+14805186235'
+           )
 
 print(message.sid)
 
